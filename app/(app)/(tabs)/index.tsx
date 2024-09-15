@@ -2,8 +2,10 @@ import { useState } from "react";
 import { View, ScrollView, TouchableOpacity, Text, StyleSheet } from "react-native";
 import Title from "@/components/Title";
 import DashboardTasks from "@/components/DashboardTasks";
+import { useAuth } from "@/app/context/auth";
 
 export default function Index() {
+    const {signOut} = useAuth();
     const [boxVisible, setBoxVisible] = useState(false);
     const [sort, setSort] = useState<'day' | 'week'>('day'); // Add state to track the sort parameter
 
@@ -61,6 +63,9 @@ export default function Index() {
                     </>
                 )}
             </View>
+            <TouchableOpacity style={styles.buttonSO} onPress={signOut}>
+                <Text style={styles.buttonTextSO}>Cerrar Sesión</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -81,6 +86,15 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontSize: 18,
+    },
+    buttonSO: {
+        backgroundColor: 'white',
+        padding: 10,
+        alignItems: 'center',
+      },
+    buttonTextSO: {
+      color: '#aa1155',
+      fontSize: 16,
     },
     box: {
         position: 'absolute',

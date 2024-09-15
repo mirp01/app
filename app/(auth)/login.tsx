@@ -1,34 +1,17 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useAuth } from '../context/auth';
 
-const LoginScreen: React.FC = () => {
-  const [email, setEmail] = useState('');
+export default function LoginScreen() {
+  const {signIn} = useAuth();
   const [password, setPassword] = useState('');
-
-  const handleLogin = () => {
-    // Here you would typically handle the login logic
-    console.log('Login attempt with:', { email, password });
-  };
-
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity style={styles.button} onPress={signIn}>
+        <Text style={styles.buttonText}>Registrarse</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={signIn}>
+        <Text style={styles.buttonText}>Iniciar sesión</Text>
       </TouchableOpacity>
     </View>
   );
@@ -39,23 +22,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    backgroundColor: '#aa1155'
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: 'white',
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
     padding: 10,
     alignItems: 'center',
+    margin: 6
   },
   buttonText: {
-    color: 'white',
+    color: '#aa1155',
     fontSize: 16,
   },
 });
-
-export default LoginScreen;
