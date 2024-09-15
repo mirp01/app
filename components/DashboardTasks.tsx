@@ -16,7 +16,7 @@ function getDayOfWeek(date: Date): string {
     return days[date.getUTCDay()];
 }
 
-// Helper function to get the Monday of the current week from a date
+
 function getMonday(date: Date): Date {
     const day = date.getUTCDay();
     const diff = (day === 0 ? -6 : 1) - day; // Adjust to Monday
@@ -25,17 +25,17 @@ function getMonday(date: Date): Date {
     return monday;
 }
 
-// Function to sort days of the week starting from Monday
+
 function sortDaysOfWeek(days: string[]): string[] {
     const orderedDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     return orderedDays.filter(day => days.includes(day));
 }
 
-// Group tasks by day of the week
+
 function groupTasksByDay(tasks: Task[]): Record<string, Task[]> {
     return tasks.reduce((grouped, task) => {
         const taskDate = new Date(task.date);
-        const dayOfWeek = getDayOfWeek(taskDate); // Get the day of the week for each task
+        const dayOfWeek = getDayOfWeek(taskDate);
         if (!grouped[dayOfWeek]) {
             grouped[dayOfWeek] = [];
         }
@@ -45,10 +45,10 @@ function groupTasksByDay(tasks: Task[]): Record<string, Task[]> {
 }
 
 export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksProps) {
-    // Filter tasks for the current week if 'sort' is 'week'
-    const currentMonday = getMonday(new Date()); // Monday of the current week
-    const nextMonday = new Date(currentMonday); // Monday of the next week
-    nextMonday.setUTCDate(currentMonday.getUTCDate() + 7); // Get the next Monday
+
+    const currentMonday = getMonday(new Date());
+    const nextMonday = new Date(currentMonday);
+    nextMonday.setUTCDate(currentMonday.getUTCDate() + 7);
 
     const tasksForWeek = tasks.filter(task => {
         const taskDate = new Date(task.date);
@@ -57,10 +57,10 @@ export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksPr
 
     const groupedTasks = groupTasksByDay(tasksForWeek);
 
-    // Sort the days of the week to ensure Monday comes first
+
     const sortedDays = sortDaysOfWeek(Object.keys(groupedTasks));
 
-    // Helper function to check if a task date matches today's date
+
     function isToday(taskDate: Date): boolean {
         const today = new Date();
         return taskDate.getUTCFullYear() === today.getUTCFullYear() &&
@@ -68,10 +68,10 @@ export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksPr
                taskDate.getUTCDate() === today.getUTCDate();
     }
 
-    // Filter tasks for today if 'sort' is 'day'
+
     const tasksForDay = tasks.filter(task => {
         const taskDate = new Date(task.date);
-        return isToday(taskDate); // Only tasks for today
+        return isToday(taskDate);
     });
 
     return (
@@ -93,7 +93,6 @@ export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksPr
                         <View key={dayOfWeek}>
                             <Text className="font-bold text-lg p-4 text-lighter">{dayOfWeek}</Text>
 
-                            {/* Render tasks for that day */}
                             {groupedTasks[dayOfWeek].map((task, index) => (
                                 <View key={index} className="w-full flex flex-row p-4">
                                     <View className="w-1/2 pr-2">
@@ -108,7 +107,6 @@ export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksPr
                     ))
                 )
             ) : (
-                // Display tasks for today when 'sort' is 'day'
                 tasksForDay.length === 0 ? (
                     <View className="flex h-80 w-full flex-col justify-center items-center">
                         <Image

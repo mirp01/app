@@ -1,4 +1,4 @@
-import { Text, View, ScrollView, TouchableOpacity, Modal, Button } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity, Modal, Button, Image } from "react-native";
 import Title from "@/components/Title";
 import { Collapsible } from '@/components/Collapsible';
 import React, { useState } from 'react';
@@ -33,13 +33,6 @@ export default function Edita() {
         setSelectedTask(null);
     };
 
-    // const deleteTask = (taskIndex) => {
-    //     const updatedTasks = tasks.filter((task, index) => index !== taskIndex);
-    //     setTasks(updatedTasks);
-    //     closeModal();
-    // };
-
-    // Function to handle the increment/decrement of task horas inside the modal
     const handleIncrement = () => {
         const updatedHours = [...taskHoras];
         updatedHours[selectedTask.index] += 1;
@@ -58,31 +51,45 @@ export default function Edita() {
         <View className="flex-1 items-center bg-white p-4">
             <View className="w-full">
                 <Title label="Edita ✎" color="mint" />
-                <ScrollView>
-                    {Object.keys(groupedTasks).map((project) => (
-                        <Collapsible key={project} title={project}>
-                            {groupedTasks[project].map((task, index) => (
-                                <TouchableOpacity key={index} onPress={() => openModal(task, index)}>
-                                    <View className="p-2 border-b border-gray-200">
-                                        <View className="flex-row justify-between">
-                                            <View className="flex-col">
-                                                <View className="flex-row">
-                                                    <Text className="font-semibold">{task.description}</Text>
+
+                {tasks.length === 0 ? (
+                    <View className="flex h-80 w-full flex-col justify-center items-center">
+                        <Image
+                            source={require('../../../assets/images/empty.png')}
+                            style={{ 
+                                width: '50%', 
+                                height: '50%', 
+                                resizeMode: 'contain',  
+                            }} />
+                    <Text className="text-sm text-center text-gray-500">No hay proyectos</Text>
+                </View>
+                ) : (
+                    <ScrollView>
+                        {Object.keys(groupedTasks).map((project) => (
+                            <Collapsible key={project} title={project}>
+                                {groupedTasks[project].map((task, index) => (
+                                    <TouchableOpacity key={index} onPress={() => openModal(task, index)}>
+                                        <View className="p-2 border-b border-gray-200">
+                                            <View className="flex-row justify-between">
+                                                <View className="flex-col">
+                                                    <View className="flex-row">
+                                                        <Text className="font-semibold">{task.description}</Text>
+                                                    </View>
+                                                    <View className="flex-row">
+                                                        <Text className="text-gray-600">{new Date(task.date).toLocaleString()}</Text>
+                                                    </View>
                                                 </View>
-                                                <View className="flex-row">
-                                                    <Text className="text-gray-600">{new Date(task.date).toLocaleString()}</Text>
+                                                <View className="flex-col items-center">
+                                                    <Text className="font-bold text-lighter text-2xl">✐</Text>
                                                 </View>
-                                            </View>
-                                            <View className="flex-col items-center">
-                                                <Text className="font-bold text-lighter text-2xl">✐</Text>
                                             </View>
                                         </View>
-                                    </View>
-                                </TouchableOpacity>
-                            ))}
-                        </Collapsible>
-                    ))}
-                </ScrollView>
+                                    </TouchableOpacity>
+                                ))}
+                            </Collapsible>
+                        ))}
+                    </ScrollView>
+                )}
             </View>
 
             {/* Modal */}
@@ -110,22 +117,21 @@ export default function Edita() {
                                             <Text className="text-[40px] text-green-500">+</Text>
                                         </TouchableOpacity>
                                     </View>
-                                    
                                 </View>
-                                
                             </View>
 
-                            <TouchableOpacity 
-                                //onPress={() => deleteTask(selectedTask.index)} 
+                            <TouchableOpacity
                                 className="bg-red-500 p-3 rounded-lg mt-4 border-black border-2"
                             >
                                 <Text className="text-white text-center font-bold">Eliminar tarea</Text>
                             </TouchableOpacity>
 
+
                             <TouchableOpacity onPress={closeModal} className="bg-mint p-3 rounded-lg mt-4 border-black border-2">
                                 <Text className="text-white text-center font-bold">Guardar y cerrar</Text>
                                 {/* Add here to update!! */}
                             </TouchableOpacity>
+
 
                         </View>
                     </View>

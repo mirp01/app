@@ -4,13 +4,12 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 
 export default function TabLayout() {
-  // Customizable colors
+
   const activeTabColor = '#ffee88';
   const inactiveTabColor = '#880044';
   const backgroundColor = '#aa1155';
   const borderColor = '#000';
 
-  // Customizable sizes
   const tabBarHeight = 60;
   const borderWidth = 3;
 
@@ -24,7 +23,6 @@ export default function TabLayout() {
           height: tabBarHeight,
           borderTopWidth: borderWidth,
           borderTopColor: borderColor,
-          // Add some padding to account for the increased height
           paddingBottom: 5,
           paddingTop: 5,
         },
@@ -49,11 +47,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="perfil"
         options={{
-          title: 'Explore',
+          title: 'Mi Cuenta',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'person-circle' : 'person-circle'} color={color} />
           ),
         }}
       />

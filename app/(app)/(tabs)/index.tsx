@@ -7,7 +7,7 @@ import {useAuth} from '@/app/context/auth';
 export default function Index() {
   const {signOut} = useAuth();
   const [boxVisible, setBoxVisible] = useState(false);
-  const [sort, setSort] = useState<'day' | 'week'>('day'); // Add state to track the sort parameter
+  const [sort, setSort] = useState<'day' | 'week'>('day');
 
   const tasks = [
     { description: 'Mandar Pull Request', project: 'Servicio Social', date: '2024-09-09T23:00:00Z' },
@@ -34,17 +34,17 @@ export default function Index() {
 
 
   const handleOpenBox = () => {
-      setBoxVisible(!boxVisible); // Toggle the visibility of the box
+      setBoxVisible(!boxVisible);
   };
 
   const handlePressWeek = () => {
-      setSort('week'); // Change the sort to 'week'
-      setBoxVisible(false); // Close the box
+      setSort('week');
+      setBoxVisible(false);
   };
 
   const handlePressDay = () => {
-      setSort('day'); // Change the sort to 'day'
-      setBoxVisible(false); // Close the box
+      setSort('day');
+      setBoxVisible(false);
   };
 
   return (
@@ -67,22 +67,20 @@ export default function Index() {
                   <>
                       <TouchableOpacity
                           style={styles.box}
-                          onPress={handlePressWeek} // Switch to week view
+                          onPress={handlePressWeek}
                       >
                           <Text style={styles.boxText}>Ver por semana</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
-                          style={[styles.box, { bottom: 140 }]} // Adjust position for second box
-                          onPress={handlePressDay} // Switch to day view
+                          style={[styles.box, { bottom: 140 }]}
+                          onPress={handlePressDay}
                       >
                           <Text style={styles.boxText}>Ver por día</Text>
                       </TouchableOpacity>
                   </>
               )}
           </View>
-          <TouchableOpacity style={styles.buttonSO} onPress={signOut}>
-                <Text style={styles.buttonTextSO}>Cerrar Sesión</Text>
-            </TouchableOpacity>
+          
       </View>
   );
 }
@@ -98,9 +96,9 @@ const styles = StyleSheet.create({
       backgroundColor: '#dd1155',
       justifyContent: 'center',
       alignItems: 'center',
-      shadowColor: 'rgba(0, 0, 0, 1)', // Solid black shadow
-    shadowOffset: { width: 2, height: 2 }, // Shadow offset
-    shadowOpacity: 1, // Fully opaque
+      shadowColor: 'rgba(0, 0, 0, 1)',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
     shadowRadius: 0,
     elevation: 6,
   },
@@ -129,10 +127,10 @@ buttonTextSO: {
       backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
-      shadowColor: 'rgba(0, 0, 0, 1)', // Solid black shadow
-    shadowOffset: { width: 2, height: 2 }, // Shadow offset
-    shadowOpacity: 1, // Fully opaque
-    shadowRadius: 0, // No blur for a solid edge
+      shadowColor: 'rgba(0, 0, 0, 1)',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
     elevation: 6,
   },
   boxText: {

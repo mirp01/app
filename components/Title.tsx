@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     container: {
         marginTop: 20,
         marginBottom: 10,
-        flexDirection: 'row', // Align text and image horizontally
-        alignItems: 'center', // Center vertically
+        flexDirection: 'row',
+        alignItems: 'center',
         position: 'relative',
     },
     textContainer: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     imageWrapper: {
-        marginLeft: 8, // Space between text and image
+        marginLeft: 8,
     },
     image: {
         width: 80,
