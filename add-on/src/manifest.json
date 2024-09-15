@@ -1,0 +1,21 @@
+{
+    "testId": "54b9f742-81bb-4ac4-8c86-6cda6b50900c",
+    "name": "Add On",
+    "version": "1.0.0",
+    "manifestVersion": 2,
+    "requirements": {
+        "apps": [
+            {
+                "name": "Express",
+                "apiVersion": 1
+            }
+        ]
+    },
+    "entryPoints": [
+        {
+            "type": "panel",
+            "id": "panel1",
+            "main": "index.html"
+        }
+    ]
+}
