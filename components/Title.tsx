@@ -1,5 +1,4 @@
-import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, StyleSheet } from 'react-native';
 
 const imageMap: { [key: string]: any } = {
     main: require('../assets/images/title-cat-main.png'),
@@ -22,22 +21,68 @@ export default function Title({ label, color = 'main' }: { label: string; color?
     const imageSource = imageMap[color] || imageMap.main;
 
     return (
-        <View style={{ marginTop: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ color: textColor, fontSize: 24, fontWeight: 'bold' }}>˗ˋˏ</Text>
-                <Text style={{ color: textColor, fontSize: 24, fontWeight: 'bold', marginHorizontal: 8 }}>{label}</Text>
+        <View style={styles.container}>
+            <View style={styles.textContainer}>
+                <Text 
+                    style={{ 
+                        color: textColor, 
+                        fontSize: 24, 
+                        fontWeight: 'bold'
+                    }}
+                >
+                    ˗ˋˏ
+                </Text>
+                <Text 
+                    style={{ 
+                        color: textColor, 
+                        fontSize: 24, 
+                        fontWeight: 'bold', 
+                        marginHorizontal: 8 
+                    }}
+                >
+                    {label}
+                </Text>
             </View>
-            <View style={{ width: 80, height: 80, marginTop: -32 }}>
+            <View style={styles.imageWrapper}>
                 <Image
                     source={imageSource}
-                    style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        resizeMode: 'contain', 
-                        transform: [{ rotate: '10deg' }] 
-                    }}
+                    style={styles.image}
                 />
             </View>
+            <View style={[styles.shadowLine, { backgroundColor: textColor, shadowColor: textColor }]} />
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 40,
+        marginBottom: 10,
+        flexDirection: 'row', // Align text and image horizontally
+        alignItems: 'center', // Center vertically
+        position: 'relative',
+    },
+    textContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    imageWrapper: {
+        marginLeft: 8, // Space between text and image
+    },
+    image: {
+        width: 80,
+        height: 80,
+        resizeMode: 'contain',
+        transform: [{ rotate: '10deg' }],
+    },
+    shadowLine: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        height: 2,
+        elevation: 5,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+    },
+});
