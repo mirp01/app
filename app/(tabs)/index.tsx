@@ -4,66 +4,65 @@ import Title from "@/components/Title";
 import DashboardTasks from "@/components/DashboardTasks";
 
 export default function Index() {
-    const [boxVisible, setBoxVisible] = useState(false);
-    const [sort, setSort] = useState<'day' | 'week'>('day'); // Add state to track the sort parameter
+  const [boxVisible, setBoxVisible] = useState(false);
+  const [sort, setSort] = useState<'day' | 'week'>('day'); // Add state to track the sort parameter
 
-    const tasks = [
-        { description: 'Label 1', project: 'Project A' },
-        { description: 'Label 2', project: 'Project B' },
-    ];
+  const tasks = [
+      { description: 'Mandar Pull Request', project: 'Servicio Social', date: '2024-09-9T23:00:00Z' },
+      { description: 'Terminar task manager', project: 'HackMTY2024', date: '2024-09-15T23:00:00Z' },
+  ];
 
-    const handleOpenBox = () => {
-        setBoxVisible(!boxVisible); // Toggle the visibility of the box
-    };
+  const handleOpenBox = () => {
+      setBoxVisible(!boxVisible); // Toggle the visibility of the box
+  };
 
-    const handlePressWeek = () => {
-        setSort('week'); // Change the sort to 'week'
-        setBoxVisible(false); // Close the box
-        console.log('Sorting by week');
-    };
+  const handlePressWeek = () => {
+      setSort('week'); // Change the sort to 'week'
+      setBoxVisible(false); // Close the box
+  };
 
-    const handlePressDay = () => {
-        setSort('day'); // Change the sort to 'day'
-        setBoxVisible(false); // Close the box
-        console.log('Sorting by day');
-    };
+  const handlePressDay = () => {
+      setSort('day'); // Change the sort to 'day'
+      setBoxVisible(false); // Close the box
+  };
 
-    return (
-        <View className="flex-1 items-center bg-white p-4">
-            <View className="w-full">
-                <Title label="Pendientes de hoy" color="main" />
-                <ScrollView>
-                    {/* Pass the sort state to DashboardTasks */}
-                    <DashboardTasks tasks={tasks} sort={sort} />
-                </ScrollView>
-            </View>
-            <View className="absolute bottom-4 right-6">
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={handleOpenBox}
-                >
-                    <Text style={styles.buttonText}>+</Text>
-                </TouchableOpacity>
-                {boxVisible && (
-                    <>
-                        <TouchableOpacity
-                            style={styles.box}
-                            onPress={handlePressWeek} // Switch to week view
-                        >
-                            <Text style={styles.boxText}>Ver por semana</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={[styles.box, { bottom: 160 }]} // Adjust position for second box
-                            onPress={handlePressDay} // Switch to day view
-                        >
-                            <Text style={styles.boxText}>Ver por día</Text>
-                        </TouchableOpacity>
-                    </>
-                )}
-            </View>
-        </View>
-    );
+  return (
+      <View className="flex-1 items-center bg-white p-4">
+          <View className="w-full">
+              <Title label={`Tareas de ${sort === 'day' ? 'hoy' : 'la semana'}`} color="main" />
+              <ScrollView>
+                  <DashboardTasks tasks={tasks} sort={sort} />
+              </ScrollView>
+          </View>
+          <View className="absolute bottom-4 right-6">
+              <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleOpenBox}
+              >
+                  <Text style={styles.buttonText}>+</Text>
+              </TouchableOpacity>
+              {boxVisible && (
+                  <>
+                      <TouchableOpacity
+                          style={styles.box}
+                          onPress={handlePressWeek} // Switch to week view
+                      >
+                          <Text style={styles.boxText}>Ver por semana</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                          style={[styles.box, { bottom: 140 }]} // Adjust position for second box
+                          onPress={handlePressDay} // Switch to day view
+                      >
+                          <Text style={styles.boxText}>Ver por día</Text>
+                      </TouchableOpacity>
+                  </>
+              )}
+          </View>
+      </View>
+  );
 }
+
+
 const styles = StyleSheet.create({
     button: {
         width: 60,
