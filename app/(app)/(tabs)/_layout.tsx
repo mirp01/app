@@ -12,7 +12,7 @@ export default function TabLayout() {
 
   // Customizable sizes
   const tabBarHeight = 60;  // Increase this value to make the background bigger
-  const borderWidth = 2;  // Change this to adjust the border width
+  const borderWidth = 3;  // Change this to adjust the border width
 
   return (
     <Tabs
@@ -35,7 +35,7 @@ export default function TabLayout() {
         options={{
           title: 'Dashboard',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <TabBarIcon name={focused ? 'file-tray-full' : 'file-tray-full'} color={color} />
           ),
         }}
       />
