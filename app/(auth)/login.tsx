@@ -4,14 +4,30 @@ import { useAuth } from '../context/auth';
 
 export default function LoginScreen() {
   const {signIn} = useAuth();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
     <View style={styles.container}>
+        <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
       <TouchableOpacity style={styles.button} onPress={signIn}>
-        <Text style={styles.buttonText}>Registrarse</Text>
+        <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={signIn}>
-        <Text style={styles.buttonText}>Iniciar sesión</Text>
+        <Text style={styles.buttonText}>Regístrate</Text>
       </TouchableOpacity>
     </View>
   );
@@ -28,14 +44,17 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'white',
     borderWidth: 1,
-    marginBottom: 10,
     paddingHorizontal: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 6
   },
   button: {
     backgroundColor: 'white',
     padding: 10,
     alignItems: 'center',
-    margin: 6
+    margin: 6,
+    borderRadius: 10
   },
   buttonText: {
     color: '#aa1155',
