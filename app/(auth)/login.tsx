@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import { useAuth } from '../context/auth';
 
 export default function LoginScreen() {
@@ -8,6 +8,16 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   return (
     <View style={styles.container}>
+      <View className='justify-center items-center'>
+      <Image
+        source={require('../../assets/images/icon.png')}
+        style={{ 
+            width: '50%', 
+            height: '50%', 
+            resizeMode: 'contain',  
+        }} />
+        <Text className='text-4xl text-white italic'>CopyCat</Text>
+      </View>
         <TextInput
         style={styles.input}
         placeholder="Email"

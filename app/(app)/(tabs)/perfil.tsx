@@ -7,10 +7,9 @@ export default function Perfil() {
   const {signOut} = useAuth();
   const [name, setName] = useState("");
 
-  // Simulate fetching data from a database
   useEffect(() => {
     const fetchName = () => {
-      setName("Name"); // Set a dummy name
+      setName("Name");
     };
 
     fetchName();
@@ -32,8 +31,8 @@ export default function Perfil() {
           )}
         </View>
       </View>
-      <TouchableOpacity style={styles.buttonSO} onPress={signOut}>
-                <Text style={styles.buttonTextSO}>Cerrar Sesión</Text>
+      <TouchableOpacity onPress={signOut}>
+                <Text>Cerrar Sesión</Text>
             </TouchableOpacity>
     </View>
   );
