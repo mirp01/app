@@ -2,40 +2,24 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
-  // Customizable colors
-  const activeTabColor = '#ffee88';
-  const inactiveTabColor = '#880044';
-  const backgroundColor = '#aa1155';
-  const borderColor = '#000';  // Change this to your preferred border color
-
-  // Customizable sizes
-  const tabBarHeight = 60;  // Increase this value to make the background bigger
-  const borderWidth = 3;  // Change this to adjust the border width
+  const colorScheme = useColorScheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: activeTabColor,
-        tabBarInactiveTintColor: inactiveTabColor,
-        tabBarStyle: {
-          backgroundColor: backgroundColor,
-          height: tabBarHeight,
-          borderTopWidth: borderWidth,
-          borderTopColor: borderColor,
-          // Add some padding to account for the increased height
-          paddingBottom: 5,
-          paddingTop: 5,
-        },
+        tabBarActiveTintColor: Colors['light'].tint,
         headerShown: false,
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Dashboard',
+          title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'file-tray-full' : 'file-tray-full'} color={color} />
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),
         }}
       />

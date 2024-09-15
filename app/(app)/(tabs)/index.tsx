@@ -2,126 +2,118 @@ import { useState } from "react";
 import { View, ScrollView, TouchableOpacity, Text, StyleSheet } from "react-native";
 import Title from "@/components/Title";
 import DashboardTasks from "@/components/DashboardTasks";
+import { useAuth } from "@/app/context/auth";
 
 export default function Index() {
-  const [boxVisible, setBoxVisible] = useState(false);
-  const [sort, setSort] = useState<'day' | 'week'>('day'); // Add state to track the sort parameter
+    const {signOut} = useAuth();
+    const [boxVisible, setBoxVisible] = useState(false);
+    const [sort, setSort] = useState<'day' | 'week'>('day'); // Add state to track the sort parameter
 
-  const tasks = [
-    { description: 'Mandar Pull Request', project: 'Servicio Social', date: '2024-09-09T23:00:00Z' },
-    { description: 'Revisar comentarios del código', project: 'Servicio Social', date: '2024-09-09T15:00:00Z' },
-    { description: 'Actualizar la documentación del proyecto', project: 'Servicio Social', date: '2024-09-09T10:00:00Z' },
+    const tasks = [
+        { description: 'Label 1', project: 'Project A' },
+        { description: 'Label 2', project: 'Project B' },
+    ];
 
-    { description: 'Terminar task manager', project: 'HackMTY2024', date: '2024-09-15T23:00:00Z' },
-    { description: 'Preparar presentación para el demo', project: 'HackMTY2024', date: '2024-09-15T18:00:00Z' },
-    { description: 'Revisar requisitos del proyecto', project: 'HackMTY2024', date: '2024-09-15T14:00:00Z' },
+    const handleOpenBox = () => {
+        setBoxVisible(!boxVisible); // Toggle the visibility of the box
+    };
 
-    { description: 'Hacer pruebas de funcionalidad', project: 'HackMTY2024', date: '2024-09-14T16:00:00Z' },
-    { description: 'Actualizar el plan de trabajo', project: 'HackMTY2024', date: '2024-09-14T09:00:00Z' },
-    { description: 'Preparar reportes de progreso', project: 'HackMTY2024', date: '2024-09-14T11:00:00Z' },
+    const handlePressWeek = () => {
+        setSort('week'); // Change the sort to 'week'
+        setBoxVisible(false); // Close the box
+        console.log('Sorting by week');
+    };
 
-    { description: 'Enviar correos a los participantes', project: 'Servicio Social', date: '2024-09-10T08:00:00Z' },
-    { description: 'Organizar reunión de seguimiento', project: 'Servicio Social', date: '2024-09-10T13:00:00Z' },
+    const handlePressDay = () => {
+        setSort('day'); // Change the sort to 'day'
+        setBoxVisible(false); // Close the box
+        console.log('Sorting by day');
+    };
 
-    { description: 'Revisar progreso del equipo', project: 'HackMTY2024', date: '2024-09-12T17:00:00Z' },
-    { description: 'Revisar entregables', project: 'HackMTY2024', date: '2024-09-12T09:00:00Z' },
-
-    { description: 'Coordinar con el equipo de diseño', project: 'HackMTY2024', date: '2024-09-11T14:00:00Z' },
-    { description: 'Actualizar el prototipo', project: 'HackMTY2024', date: '2024-09-11T10:00:00Z' },
-];
-
-
-  const handleOpenBox = () => {
-      setBoxVisible(!boxVisible); // Toggle the visibility of the box
-  };
-
-  const handlePressWeek = () => {
-      setSort('week'); // Change the sort to 'week'
-      setBoxVisible(false); // Close the box
-  };
-
-  const handlePressDay = () => {
-      setSort('day'); // Change the sort to 'day'
-      setBoxVisible(false); // Close the box
-  };
-
-  return (
-      <View className="flex-1 items-center bg-white p-4">
-          <View className="w-full">
-              <Title label={`Tareas de ${sort === 'day' ? 'hoy' : 'la semana'}`} color="main" />
-              <ScrollView>
-                  <DashboardTasks tasks={tasks} sort={sort} />
-              </ScrollView>
-          </View>
-          <View className="absolute bottom-4 right-6">
-              <TouchableOpacity
-                  style={styles.button}
-                  onPress={handleOpenBox}
-              >
-                  <Text style={styles.buttonText}>+</Text>
-              </TouchableOpacity>
-              {boxVisible && (
-                  <>
-                      <TouchableOpacity
-                          style={styles.box}
-                          onPress={handlePressWeek} // Switch to week view
-                      >
-                          <Text style={styles.boxText}>Ver por semana</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                          style={[styles.box, { bottom: 140 }]} // Adjust position for second box
-                          onPress={handlePressDay} // Switch to day view
-                      >
-                          <Text style={styles.boxText}>Ver por día</Text>
-                      </TouchableOpacity>
-                  </>
-              )}
-          </View>
-      </View>
-  );
+    return (
+        <View className="flex-1 items-center bg-white p-4">
+            <View className="w-full">
+                <Title label="Pendientes de hoy" color="main" />
+                <ScrollView>
+                    {/* Pass the sort state to DashboardTasks */}
+                    <DashboardTasks tasks={tasks} sort={sort} />
+                </ScrollView>
+            </View>
+            <View className="absolute bottom-4 right-6">
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={handleOpenBox}
+                >
+                    <Text style={styles.buttonText}>+</Text>
+                </TouchableOpacity>
+                {boxVisible && (
+                    <>
+                        <TouchableOpacity
+                            style={styles.box}
+                            onPress={handlePressWeek} // Switch to week view
+                        >
+                            <Text style={styles.boxText}>Ver por semana</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.box, { bottom: 160 }]} // Adjust position for second box
+                            onPress={handlePressDay} // Switch to day view
+                        >
+                            <Text style={styles.boxText}>Ver por día</Text>
+                        </TouchableOpacity>
+                    </>
+                )}
+            </View>
+            <TouchableOpacity style={styles.buttonSO} onPress={signOut}>
+                <Text style={styles.buttonTextSO}>Cerrar Sesión</Text>
+            </TouchableOpacity>
+        </View>
+    );
 }
-
-
 const styles = StyleSheet.create({
-  button: {
-      width: 60,
-      height: 60,
-      borderColor: '#000',
-      borderWidth: 2,
-      borderRadius: 30,
-      backgroundColor: '#dd1155',
-      justifyContent: 'center',
-      alignItems: 'center',
-      shadowColor: 'rgba(0, 0, 0, 1)', // Solid black shadow
-    shadowOffset: { width: 2, height: 2 }, // Shadow offset
-    shadowOpacity: 1, // Fully opaque
-    shadowRadius: 0,
-    elevation: 6,
-  },
-  buttonText: {
-      color: 'black',
-      fontSize: 18,
-  },
-  box: {
-      position: 'absolute',
-      bottom: 70,
-      right: 0,
-      width: 150,
-      height: 60,
-      borderColor: '#000',
-      borderWidth: 2,
-      borderRadius: 8,
-      backgroundColor: '#fff',
-      justifyContent: 'center',
-      alignItems: 'center',
-      shadowColor: 'rgba(0, 0, 0, 1)', // Solid black shadow
-    shadowOffset: { width: 2, height: 2 }, // Shadow offset
-    shadowOpacity: 1, // Fully opaque
-    shadowRadius: 0, // No blur for a solid edge
-    elevation: 6,
-  },
-  boxText: {
-      fontSize: 14,
-      color: '#333',
-  },
+    button: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: '#dd1155',
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2.5,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 18,
+    },
+    buttonSO: {
+        backgroundColor: 'white',
+        padding: 10,
+        alignItems: 'center',
+      },
+    buttonTextSO: {
+      color: '#aa1155',
+      fontSize: 16,
+    },
+    box: {
+        position: 'absolute',
+        bottom: 70,
+        right: 0,
+        width: 150,
+        height: 60,
+        borderRadius: 8,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2.5,
+    },
+    boxText: {
+        fontSize: 14,
+        color: '#333',
+    },
 });
