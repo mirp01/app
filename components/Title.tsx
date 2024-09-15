@@ -56,7 +56,7 @@ export default function Title({ label, color = 'main' }: { label: string; color?
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 40,
+        marginTop: 20,
         marginBottom: 10,
         flexDirection: 'row', // Align text and image horizontally
         alignItems: 'center', // Center vertically
