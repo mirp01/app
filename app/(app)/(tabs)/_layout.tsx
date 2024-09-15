@@ -23,7 +23,16 @@ export default function TabLayout() {
           ),
         }}
       />
-    <Tabs.Screen
+      <Tabs.Screen
+        name="edita"
+        options={{
+          title: 'Edita',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'create' : 'create'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',

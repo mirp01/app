@@ -8,6 +8,5 @@ export default function RootLayout() {
         <Slot/>
       </Stack>
     </AuthProvider>
-    
   );
 }
