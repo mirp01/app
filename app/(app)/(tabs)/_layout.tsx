@@ -8,11 +8,11 @@ export default function TabLayout() {
   const activeTabColor = '#ffee88';
   const inactiveTabColor = '#880044';
   const backgroundColor = '#aa1155';
-  const borderColor = '#000';  // Change this to your preferred border color
+  const borderColor = '#000';
 
   // Customizable sizes
-  const tabBarHeight = 60;  // Increase this value to make the background bigger
-  const borderWidth = 3;  // Change this to adjust the border width
+  const tabBarHeight = 60;
+  const borderWidth = 3;
 
   return (
     <Tabs

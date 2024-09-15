@@ -38,8 +38,20 @@ export default function Edita() {
                         <Collapsible key={project} title={project}>
                             {groupedTasks[project].map((task, index) => (
                                 <View key={index} className="p-2 border-b border-gray-200">
-                                    <Text className="font-semibold">{task.description}</Text>
-                                    <Text className="text-gray-600">{new Date(task.date).toLocaleString()}</Text>
+                                    <View className="flex-row justify-between">
+                                        <View className="flex-col">
+                                            <View className="flex-row">
+                                                <Text className="font-semibold">{task.description}</Text>
+                                            </View>
+                                            <View className="flex-row">
+                                                <Text className="text-gray-600">{new Date(task.date).toLocaleString()}</Text>
+                                            </View>
+                                        </View>
+                                        <View className="flex-col items-center">
+                                            <Text className="font-bold text-lighter text-2xl">✐</Text>
+                                        </View>
+                                    </View>
+                                    
                                 </View>
                             ))}
                         </Collapsible>
