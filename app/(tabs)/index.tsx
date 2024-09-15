@@ -8,9 +8,28 @@ export default function Index() {
   const [sort, setSort] = useState<'day' | 'week'>('day'); // Add state to track the sort parameter
 
   const tasks = [
-      { description: 'Mandar Pull Request', project: 'Servicio Social', date: '2024-09-9T23:00:00Z' },
-      { description: 'Terminar task manager', project: 'HackMTY2024', date: '2024-09-15T23:00:00Z' },
-  ];
+    { description: 'Mandar Pull Request', project: 'Servicio Social', date: '2024-09-09T23:00:00Z' },
+    { description: 'Revisar comentarios del código', project: 'Servicio Social', date: '2024-09-09T15:00:00Z' },
+    { description: 'Actualizar la documentación del proyecto', project: 'Servicio Social', date: '2024-09-09T10:00:00Z' },
+
+    { description: 'Terminar task manager', project: 'HackMTY2024', date: '2024-09-15T23:00:00Z' },
+    { description: 'Preparar presentación para el demo', project: 'HackMTY2024', date: '2024-09-15T18:00:00Z' },
+    { description: 'Revisar requisitos del proyecto', project: 'HackMTY2024', date: '2024-09-15T14:00:00Z' },
+
+    { description: 'Hacer pruebas de funcionalidad', project: 'HackMTY2024', date: '2024-09-14T16:00:00Z' },
+    { description: 'Actualizar el plan de trabajo', project: 'HackMTY2024', date: '2024-09-14T09:00:00Z' },
+    { description: 'Preparar reportes de progreso', project: 'HackMTY2024', date: '2024-09-14T11:00:00Z' },
+
+    { description: 'Enviar correos a los participantes', project: 'Servicio Social', date: '2024-09-10T08:00:00Z' },
+    { description: 'Organizar reunión de seguimiento', project: 'Servicio Social', date: '2024-09-10T13:00:00Z' },
+
+    { description: 'Revisar progreso del equipo', project: 'HackMTY2024', date: '2024-09-12T17:00:00Z' },
+    { description: 'Revisar entregables', project: 'HackMTY2024', date: '2024-09-12T09:00:00Z' },
+
+    { description: 'Coordinar con el equipo de diseño', project: 'HackMTY2024', date: '2024-09-11T14:00:00Z' },
+    { description: 'Actualizar el prototipo', project: 'HackMTY2024', date: '2024-09-11T10:00:00Z' },
+];
+
 
   const handleOpenBox = () => {
       setBoxVisible(!boxVisible); // Toggle the visibility of the box
@@ -64,41 +83,45 @@ export default function Index() {
 
 
 const styles = StyleSheet.create({
-    button: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        backgroundColor: '#dd1155',
-        justifyContent: 'center',
-        alignItems: 'center',
-        elevation: 5,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 2.5,
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 18,
-    },
-    box: {
-        position: 'absolute',
-        bottom: 70,
-        right: 0,
-        width: 150,
-        height: 60,
-        borderRadius: 8,
-        backgroundColor: '#fff',
-        justifyContent: 'center',
-        alignItems: 'center',
-        elevation: 5,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 2.5,
-    },
-    boxText: {
-        fontSize: 14,
-        color: '#333',
-    },
+  button: {
+      width: 60,
+      height: 60,
+      borderColor: '#000',
+      borderWidth: 2,
+      borderRadius: 30,
+      backgroundColor: '#dd1155',
+      justifyContent: 'center',
+      alignItems: 'center',
+      shadowColor: 'rgba(0, 0, 0, 1)', // Solid black shadow
+    shadowOffset: { width: 2, height: 2 }, // Shadow offset
+    shadowOpacity: 1, // Fully opaque
+    shadowRadius: 0,
+    elevation: 6,
+  },
+  buttonText: {
+      color: 'black',
+      fontSize: 18,
+  },
+  box: {
+      position: 'absolute',
+      bottom: 70,
+      right: 0,
+      width: 150,
+      height: 60,
+      borderColor: '#000',
+      borderWidth: 2,
+      borderRadius: 8,
+      backgroundColor: '#fff',
+      justifyContent: 'center',
+      alignItems: 'center',
+      shadowColor: 'rgba(0, 0, 0, 1)', // Solid black shadow
+    shadowOffset: { width: 2, height: 2 }, // Shadow offset
+    shadowOpacity: 1, // Fully opaque
+    shadowRadius: 0, // No blur for a solid edge
+    elevation: 6,
+  },
+  boxText: {
+      fontSize: 14,
+      color: '#333',
+  },
 });

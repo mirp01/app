@@ -16,6 +16,21 @@ function getDayOfWeek(date: Date): string {
     return days[date.getUTCDay()];
 }
 
+// Helper function to get the Monday of the current week from a date
+function getMonday(date: Date): Date {
+    const day = date.getUTCDay();
+    const diff = (day === 0 ? -6 : 1) - day; // Adjust to Monday
+    const monday = new Date(date);
+    monday.setUTCDate(date.getUTCDate() + diff);
+    return monday;
+}
+
+// Function to sort days of the week starting from Monday
+function sortDaysOfWeek(days: string[]): string[] {
+    const orderedDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    return orderedDays.filter(day => days.includes(day));
+}
+
 // Group tasks by day of the week
 function groupTasksByDay(tasks: Task[]): Record<string, Task[]> {
     return tasks.reduce((grouped, task) => {
@@ -29,18 +44,7 @@ function groupTasksByDay(tasks: Task[]): Record<string, Task[]> {
     }, {} as Record<string, Task[]>);
 }
 
-
 export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksProps) {
-    
-    // Helper function to get the Monday of the current week from a date
-    function getMonday(date: Date): Date {
-        const day = date.getUTCDay();
-        const diff = (day === 0 ? -6 : 1) - day; // Adjust to Monday
-        const monday = new Date(date);
-        monday.setUTCDate(date.getUTCDate() + diff);
-        return monday;
-    }
-
     // Filter tasks for the current week if 'sort' is 'week'
     const currentMonday = getMonday(new Date()); // Monday of the current week
     const nextMonday = new Date(currentMonday); // Monday of the next week
@@ -52,6 +56,9 @@ export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksPr
     });
 
     const groupedTasks = groupTasksByDay(tasksForWeek);
+
+    // Sort the days of the week to ensure Monday comes first
+    const sortedDays = sortDaysOfWeek(Object.keys(groupedTasks));
 
     // Helper function to check if a task date matches today's date
     function isToday(taskDate: Date): boolean {
@@ -82,7 +89,7 @@ export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksPr
                         <Text className="text-sm text-center text-gray-500">No hay tarea</Text>
                     </View>
                 ) : (
-                    Object.keys(groupedTasks).map((dayOfWeek) => (
+                    sortedDays.map((dayOfWeek) => (
                         <View key={dayOfWeek}>
                             <Text className="font-bold text-lg p-4 text-lighter">{dayOfWeek}</Text>
 
@@ -93,7 +100,7 @@ export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksPr
                                         <Text className="text-sm">{task.description}</Text>
                                     </View>
                                     <View className="w-1/2 pl-2">
-                                        <Text className="font-bold text-sm text-center bg-mint p-2">{task.project}</Text>
+                                        <Text className="font-bold text-sm text-center border-black border-2 rounded-md bg-mint p-2">{task.project}</Text>
                                     </View>
                                 </View>
                             ))}
@@ -101,7 +108,7 @@ export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksPr
                     ))
                 )
             ) : (
-                // Display tasks for today when 'sort' is 'day' (this part remains the same)
+                // Display tasks for today when 'sort' is 'day'
                 tasksForDay.length === 0 ? (
                     <View className="flex h-80 w-full flex-col justify-center items-center">
                         <Image
@@ -120,7 +127,7 @@ export default function DashboardTasks({ tasks, sort = 'day' }: DashboardTasksPr
                                 <Text className="text-sm">{task.description}</Text>
                             </View>
                             <View className="w-1/2 pl-2">
-                                <Text className="font-bold text-sm text-center bg-mint p-2">{task.project}</Text>
+                                <Text className="font-bold text-sm text-center bg-mint border-black border-2 rounded-md p-2">{task.project}</Text>
                             </View>
                         </View>
                     ))
