@@ -50,7 +50,8 @@ export default function Index() {
   return (
       <View className="flex-1 items-center bg-white p-4">
           <View className="w-full">
-              <Title label={Tareas de ${sort === 'day' ? 'hoy' : 'la semana'}} color="main" />
+          <Title label={`Tareas de ${sort === 'day' ? 'hoy' : 'la semana'}`} color="main" />
+
               <ScrollView>
                   <DashboardTasks tasks={tasks} sort={sort} />
               </ScrollView>

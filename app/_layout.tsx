@@ -4,8 +4,8 @@ import { AuthProvider } from "./context/auth";
 export default function RootLayout() {
   return (
     <AuthProvider>
-      <Stack>
-        <Slot/>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Slot />
       </Stack>
     </AuthProvider>
   );
